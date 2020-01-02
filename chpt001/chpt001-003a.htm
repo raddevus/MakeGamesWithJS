@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>First HTML</title>
+<style>
+#gameArea {border:solid}
+#gameArea:hover {color:red;cursor:crosshair}
+</style>
+</head>
+<body onmousedown="showCoords(event)">
+<canvas id="gameArea">If you see this, your browser does not support HTML5 Canvas.</canvas>
+<p>Hello, Game-Programmer!</p>
+<script>
+function showCoords(e){
+	console.log("X : " + e.clientX + "    Y : " + e.clientY);
+	console.log("X : " + e.screenX + "    Y : " + e.screenY);
+}
+</script>
+</body>
+</html>
