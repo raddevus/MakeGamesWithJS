@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>First HTML</title>
+	<style>
+		#gameArea {background-color:yellow;}
+        #gameArea:hover{cursor:crosshair;}
+		body{margin:0px;}
+
+	</style>
+    <script>
+        var boxImage = new Image();
+        
+        boxImage.onload = () => {
+            context = document.querySelector("#gameArea").getContext("2d");
+            context.drawImage(boxImage, 20, 20);
+            context.fillStyle  = "#000000";
+            context.font = "15px Sans-Serif";
+            context.textBaseline = "top";
+            context.fillText("<--- image on CANVAS", 50,20);
+        }
+        boxImage.src = "../assets/chpt001/box.png";
+    </script>
+</head>
+<body>
+<canvas id="gameArea">If you see this, your browser does
+	 not support HTML5 Canvas.</canvas>
+<p>Hello, Game-Programmer!</p>
+<hr>
+<img src="../assets/chpt001/box.png" ><span><--- image in DOM</span>
+</body>
+</html>
+
+
