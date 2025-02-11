@@ -114,7 +114,7 @@
 
         // Initialize
         drawCharacter();
-        gameLoop();
+        stopId = requestAnimationFrame(gameLoop); // <--- this starts the game loop
 
         // Example movement
          // Move character to north-east every second
