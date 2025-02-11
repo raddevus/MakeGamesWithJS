@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Movement</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="500" height="500"></canvas>
+    <script>
+
+        // #### This script was provided by a question to copilot as follows:
+        // I'm drawing a bitmap image of a character who can face in 8 directions of 
+        // the compass rose on a cartesian coordinate system. I'm using HTML5 canvas 
+        // and javascript. How do I handle moving character in angular movement 
+        // like north-east, south-west etc.?
+        // #### I made some minor changes in an effort to learn what it was doing.
+        // #### I will use this later when I move a character across the 
+        // game map
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let character = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            size: 10,
+            angle: 0,
+            speed: 3
+        };
+
+        let direction = 'north-east';
+
+        function drawCharacter() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(character.x, character.y, character.size, 0, Math.PI * 2);
+            ctx.fillStyle = 'blue';
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function updatePosition() {
+            // console.log(`y: ${character.y}`);
+            if ((character.x + 20) >= canvas.width){
+                direction = 'south-west';
+                moveBackward();
+                return;
+            }
+            if ((character.y +20) >= canvas.height ){
+                direction = 'north-east';
+                moveForward();
+                return;
+            }
+            moveForward();
+            // if (character.x <= 0){
+            //     moveForwards();
+            // }
+            
+        }
+
+        function moveBackward(){
+            character.x += Math.cos(-character.angle) * character.speed;
+            character.y += Math.sin(-character.angle) * character.speed;
+        }
+
+        function moveForward(){
+            character.x += Math.cos(character.angle) * character.speed;
+            character.y += Math.sin(character.angle) * character.speed;
+        }
+
+        function moveCharacter(direction) {
+            switch (direction) {
+                case 'north':
+                    character.angle = -Math.PI / 2;
+                    break;
+                case 'north-east':
+                    character.angle = -Math.PI / 4;
+                    break;
+                case 'east':
+                    character.angle = 0;
+                    break;
+                case 'south-east':
+                    character.angle = Math.PI / 4;
+                    break;
+                case 'south':
+                    character.angle = Math.PI / 2;
+                    break;
+                case 'south-west':
+                    character.angle = 3 * Math.PI / 4;
+                    break;
+                case 'west':
+                    character.angle = Math.PI;
+                    break;
+                case 'north-west':
+                    character.angle = -3 * Math.PI / 4;
+                    break;
+            }
+        }
+
+        function gameLoop() {
+            updatePosition();
+            drawCharacter();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Initialize
+        drawCharacter();
+        gameLoop();
+
+        // Example movement
+         // Move character to north-east every second
+        setInterval(() => moveCharacter(direction), 1000); 
+    </script>
+</body>
+</html>
