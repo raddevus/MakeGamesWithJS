@@ -102,11 +102,14 @@
                     break;
             }
         }
-
+        var stopId = 0;
         function gameLoop() {
             updatePosition();
             drawCharacter();
-            requestAnimationFrame(gameLoop);
+            stopId = requestAnimationFrame(gameLoop);
+            // console.log(`stopId: ${stopId}`);
+            // since we capture the stopId, you can now stop the animation with
+            // window.cancelAnimationFrame(stopId); // try it in console
         }
 
         // Initialize
