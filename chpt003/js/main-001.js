@@ -25,7 +25,6 @@ function initApp(){
 
 function takeSnap(){
     var gameArea = document.querySelector("#gameArea");
-    context = gameArea.getContext("2d");
     var snapEl = document.querySelector("#snapout");
     console.log(gameArea.toDataURL());
     snapEl.src = gameArea.toDataURL();

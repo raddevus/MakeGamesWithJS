@@ -33,7 +33,6 @@ function initApp(){
 
 function takeSnap(){
     var gameArea = document.querySelector("#gameArea");
-    
     var snapEl = document.querySelector("#snapout");
     console.log(gameArea.toDataURL());
     snapEl.src = gameArea.toDataURL();
