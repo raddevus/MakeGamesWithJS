@@ -27,8 +27,6 @@ function initApp(){
     app.context.font = "15px Sans-Serif";
     app.context.textBaseline = "top";
     app.context.fillText("<--- image on CANVAS", 50,20);
-
-    console.log(app.context);
 }
 
 function takeSnap(){
