@@ -1,4 +1,4 @@
-// chpt003 - main.js
+// chpt003 - main-001.js
 var boxImage = new Image();
     
 window.onload = () => {

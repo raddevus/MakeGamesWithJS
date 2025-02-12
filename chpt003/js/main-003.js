@@ -1,4 +1,4 @@
-// chpt003 - main-002.js
+// chpt003 - main-003.js
 var boxImage = new Image();
     
 window.onload = () => {
@@ -8,6 +8,7 @@ boxImage.src = "../assets/chpt001/box.png";
 
 var app = null;
 var gameArea = null; 
+var mouseLoc = null;
 const mainCanvasId = "gameArea";
 
 function initApp(){
@@ -17,8 +18,14 @@ function initApp(){
 
     var locationOutput = document.querySelector("#cursor-location");
     gameArea.addEventListener("mousemove", (e)=>{
-        var loc = getMousePos(e,gameArea);
-        locationOutput.textContent = `${loc.X} : ${loc.Y}`;
+        mouseLoc = getMousePos(e,gameArea);
+        locationOutput.textContent = `${mouseLoc.X} : ${mouseLoc.Y}`;
+    });
+
+    gameArea.addEventListener("click", () =>{
+
+        console.log(`from click - ${mouseLoc.X} : ${mouseLoc.Y}`);
+        Draw();
     });
 
     app = new App(mainCanvasId);
@@ -26,11 +33,7 @@ function initApp(){
 }
 
 function Draw(){
-    app.context.drawImage(boxImage, 20, 20);
-    app.context.fillStyle  = "#000000";
-    app.context.font = "15px Sans-Serif";
-    app.context.textBaseline = "top";
-    app.context.fillText("<--- image on CANVAS", 50,20);
+    app.context.drawImage(boxImage, mouseLoc.X, mouseLoc.Y);
 }
 
 function takeSnap(){
