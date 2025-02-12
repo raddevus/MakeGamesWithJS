@@ -10,7 +10,7 @@ var app = null;
 var gameArea = null; 
 var mouseLoc = null;
 const mainCanvasId = "gameArea";
-
+var boxLoc = new Point(0,0);
 function initApp(){
     
     var context = null;
@@ -22,9 +22,28 @@ function initApp(){
         locationOutput.textContent = `${mouseLoc.X} : ${mouseLoc.Y}`;
     });
 
-    gameArea.addEventListener("click", () =>{
-
-        console.log(`from click - ${mouseLoc.X} : ${mouseLoc.Y}`);
+    document.addEventListener("keydown", (e) => {
+        console.log(e.key);
+        switch (e.key){
+            case "ArrowUp":{
+                boxLoc.Y -= 1;
+                break;
+            }
+            case "ArrowDown":{
+                boxLoc.Y += 1;
+                break;
+            }
+            case "ArrowLeft":{
+                boxLoc.X -= 1;
+                break;
+            }
+            case "ArrowRight":{
+                boxLoc.X += 1;
+                break;
+            }
+        }
+        console.log(`${boxLoc.X} : ${boxLoc.Y}`);
+        ClearCanvas();
         Draw();
     });
 
@@ -32,8 +51,12 @@ function initApp(){
     Draw();
 }
 
+function ClearCanvas(){
+
+}
+
 function Draw(){
-    app.context.drawImage(boxImage, mouseLoc.X, mouseLoc.Y);
+    app.context.drawImage(boxImage, boxLoc.X, boxLoc.Y);
 }
 
 function takeSnap(){
