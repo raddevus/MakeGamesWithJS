@@ -37,7 +37,7 @@ function Draw(){
 }
 
 function takeSnap(){
-    var gameArea = document.querySelector("#gameArea");
+    var gameArea = document.querySelector(`#${mainCanvasId}`);
     var snapEl = document.querySelector("#snapout");
     console.log(gameArea.toDataURL());
     snapEl.src = gameArea.toDataURL();
@@ -45,7 +45,7 @@ function takeSnap(){
 
 class App{
 
-    // pass the canvas element that you want to 
+    // pass the id of canvas element that you want to 
     // use to draw on
     constructor(canvasId){
         this.gameArea = document.querySelector(`#${canvasId}`);
