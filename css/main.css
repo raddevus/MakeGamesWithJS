@@ -1,2 +1,6 @@
 /* main.css */
 /* shared styles for multiple projects */
+
+#gameArea {background-color:yellow;}
+#gameArea:hover{cursor:crosshair;}
+body{margin:0px;}
