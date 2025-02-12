@@ -4,3 +4,4 @@
 #gameArea {background-color:yellow;}
 #gameArea:hover{cursor:crosshair;}
 body{margin:0px;}
+.hidden{display:none;visibility: hidden;}
