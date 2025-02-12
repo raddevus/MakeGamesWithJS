@@ -22,6 +22,10 @@ function initApp(){
     });
 
     app = new App(mainCanvasId);
+    Draw();
+}
+
+function Draw(){
     app.context.drawImage(boxImage, 20, 20);
     app.context.fillStyle  = "#000000";
     app.context.font = "15px Sans-Serif";
