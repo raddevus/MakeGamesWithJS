@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Trap Points</title>
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<canvas id="gamescreen">You're browser does not support HTML5.</canvas>
+<script src="js/trappoints.js"></script>
+
+<div class="startLocation">
+	<button  onclick="connectPoints();" class="btn btn-primary">Connect Points</button>
+	
+		<div class="form-group">
+			<div class="input-group">
+				<input type="number" min="0" class="form-control" id="triangleNumber" placeholder="Triangle number">
+				<div><button class="btn btn-primary" onclick="drawTriangle()">Draw Triangle</button>
+					<button class="btn btn-primary" onclick="clearLines()">Clear Lines</button>
+				</div>
+			</div>
+		</div>
+	
+	<button onclick="calcHull();" class="btn btn-primary">Calc Hull</button>
+	<button onclick="generateRandomPoints(50);" class="btn btn-primary">Generate Points</button>
+	<button onclick="clearPoints();" class="btn btn-primary">Clear</button>
+
+<!-- blogtop -->	
+<!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:320px;height:100px"
+     data-ad-client="ca-pub-6286879032545261"
+     data-ad-slot="6030258726"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script> -->
+</div>
+
+</body>
+</html>
