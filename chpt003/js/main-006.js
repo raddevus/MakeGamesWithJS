@@ -66,7 +66,9 @@ function initApp(){
 }
 
 function ClearCanvas(){
-
+    app.context.clearRect(0,0,300,150);
+    app.context.fillStyle = 'rgba(0, 0, 0, 0.0)';
+    app.context.fillRect(0, 0, 300,150);
 }
 
 function Draw(){
