@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>First HTML</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/common.js"></script>    
+    <script src="js/main-002.js"></script>
+</head>
+<body>
+
+<canvas id="gameArea">If you see this, your browser does
+	 not support HTML5 Canvas.</canvas>
+<div>
+    <label for="quantity">Speed:</label>
+    <input type="number" id="speed" name="speed" min="1" max="25" value="1">
+</div>
+<p>Hello, Game-Programmer!</p> <button id="snapshot" onclick="takeSnap()">Take Snapshot</button>
+<div id="cursor-location"></div>
+<hr>
+<img class="hidden" src="../assets/chpt001/box.png" >
+<div>
+    <img id="snapout" src="" crossOrigin="anonymous" style="background:yellow"><span><--- image from snap</span>
+</div>
+</body>
+</html>
+
+
