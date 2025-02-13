@@ -21,6 +21,7 @@ function initApp(){
     gameArea = document.querySelector(`#${mainCanvasId}`);
     gameArea.width = ga_width;
     gameArea.height = ga_height;
+
     speedEl = document.querySelector("#speed");
     speed = speedEl.valueAsNumber;
 
