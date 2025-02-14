@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chapter 2 Example 28: Animating a Path</title>
+<script type="text/javascript">
+window.addEventListener('load', eventWindowLoaded, false);	
+function eventWindowLoaded() {
+	canvasApp();
+}
+
+let isMovingForward = true;
+
+function canvasApp(){
+	
+	var theCanvas = document.getElementById('canvas');
+	var context = theCanvas.getContext('2d');
+	
+	var yOffset=0;
+
+	function drawScreen(){
+		
+		context.clearRect(0,0,theCanvas.width,theCanvas.height);
+
+		var currentPath=context.beginPath();
+		context.strokeStyle = "red"; //need list of available colors
+		context.lineWidth=5;
+		context.moveTo(0, 0+yOffset);
+		context.lineTo(50, 0+yOffset);
+		context.lineTo(50,50+yOffset);
+		context.stroke();
+		context.closePath();
+		if (isMovingForward){
+			yOffset+=5;
+			if (yOffset >= 503){
+				isMovingForward = false;
+			}
+		}
+		else{
+			yOffset-=5;
+			if(yOffset <= -10){
+				isMovingForward = true;
+			}
+		}
+		
+	}
+	
+	let stopId = null;
+	function gameLoop() {
+		// window.setTimeout(gameLoop, 20);
+		drawScreen()    
+		
+		stopId = requestAnimationFrame(gameLoop);
+    }
+	
+	stopId = requestAnimationFrame(gameLoop);
+	
+	// console.log("stopped");
+	
+	
+}
+
+
+</script> 
+</head>
+<body>
+<div style="position: absolute; top: 50px; left: 50px;">
+<canvas id="canvas" width="500" height="500">
+ Your browser does not support the HTML 5 Canvas. 
+</canvas>
+</div>
+</body>
+</html>
