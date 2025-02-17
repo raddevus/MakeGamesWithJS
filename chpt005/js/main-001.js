@@ -12,8 +12,8 @@ var app = null;
 var gameArea = null; 
 var mouseLoc = null;
 const mainCanvasId = "gameArea";
-var boxLoc = new Point(0,0);
 var gridLoc = new Point(0,0);
+
 var speed;
 const ga_width = 500;
 const ga_height = 500;
@@ -47,42 +47,28 @@ function initApp(){
         locationOutput.textContent = `${mouseLoc.X} : ${mouseLoc.Y}`;
     });
 
-
-
     document.addEventListener("keydown", (e) => {
-        console.log(`${boxLoc.X} : ${boxLoc.Y}`);
+        console.log(`${gridLoc.X} : ${gridLoc.Y}`);
 
         switch (e.key){
             case "ArrowUp":{
-                if (boxLoc.Y - (offset + speed) < -(offset)){
-                    return;
-                }
-                boxLoc.Y -= speed;
+                gridLoc.Y += speed;
                 break;
             }
             case "ArrowDown":{
-                if (boxLoc.Y + speed > ga_height - avatarWidth){
-                    return;
-                }                
-                boxLoc.Y += speed;
+                gridLoc.Y -= speed;
                 break;
             }
             case "ArrowLeft":{
-                if (boxLoc.X - (offset + speed) < -(offset)){
-                    return
-                }
-                boxLoc.X -= speed;
+                gridLoc.X += speed;
                 break;
             }
             case "ArrowRight":{
-                if (boxLoc.X + speed > ga_width - avatarWidth){
-                    return;
-                }
-                boxLoc.X += speed;
+                gridLoc.X -= speed;
                 break;
             }
         }
-        console.log(`${boxLoc.X} : ${boxLoc.Y}`);
+        console.log(`${gridLoc.X} : ${gridLoc.Y}`);
         ClearCanvas();
         Draw();
     });
@@ -98,7 +84,7 @@ function ClearCanvas(){
 }
 
 function Draw(){
-    app.context.drawImage(gridImage,boxLoc.X, boxLoc.Y,500,500);
+    app.context.drawImage(gridImage,gridLoc.X, gridLoc.Y,1000,1000);
     app.context.drawImage(boxImage, 230, 230,avatarWidth,avatarWidth);
 }
 
