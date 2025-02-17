@@ -1,16 +1,19 @@
 // chpt003 - main-003.js
 var boxImage = new Image();
+var gridImage = new Image();
     
 window.onload = () => {
     initApp();
 }
 boxImage.src = "../assets/chpt001/box.png";
+gridImage.src = "../assets/chpt005/1000Grid50pix.png";
 
 var app = null;
 var gameArea = null; 
 var mouseLoc = null;
 const mainCanvasId = "gameArea";
 var boxLoc = new Point(0,0);
+var gridLoc = new Point(0,0);
 var speed;
 const ga_width = 500;
 const ga_height = 500;
@@ -95,7 +98,8 @@ function ClearCanvas(){
 }
 
 function Draw(){
-    app.context.drawImage(boxImage, boxLoc.X, boxLoc.Y,avatarWidth,avatarWidth);
+    app.context.drawImage(gridImage,boxLoc.X, boxLoc.Y,500,500);
+    app.context.drawImage(boxImage, 230, 230,avatarWidth,avatarWidth);
 }
 
 function takeSnap(){
