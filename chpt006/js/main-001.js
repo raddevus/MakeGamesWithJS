@@ -1,6 +1,8 @@
 // chpt003 - main-003.js
 var boxImage = new Image();
 var gridImage = new Image();
+var bunnyImage = new Image();
+var imgIdx = 0;
 var radius = 10;
 var allCircles = [];
 
@@ -10,13 +12,14 @@ window.onload = () => {
 
 boxImage.src = "../assets/chpt001/box.png";
 gridImage.src = "../assets/chpt005/1000Grid50pix.png";
+bunnyImage.src = "../assets/chpt006/bunny.png";
 
 var app = null;
 var gameArea = null; 
 var mouseLoc = null;
 const mainCanvasId = "gameArea";
 var gridLoc = new Point(0,0);
-
+var charPositions = [0,17,32];
 var speed;
 const ga_width = 500;
 const ga_height = 500;
@@ -148,7 +151,9 @@ function Draw(){
     app.context.drawImage(gridImage,gridLoc.X, gridLoc.Y,1000,1000);
     DrawCircle();
     DrawRandomCircles();
-    app.context.drawImage(boxImage, 230, 230,avatarWidth,avatarWidth);
+    app.context.drawImage(bunnyImage, charPositions[imgIdx], 17, 16, 16, 230, 230, 48, 48);
+    imgIdx = ++imgIdx % 3
+    //app.context.drawImage(bunnyImage, 230, 230,avatarWidth,avatarWidth);
 
 }
 
