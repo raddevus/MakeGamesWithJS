@@ -3,10 +3,11 @@ var boxImage = new Image();
 var gridImage = new Image();
 var radius = 10;
 var allCircles = [];
-    
+
 window.onload = () => {
     initApp();
 }
+
 boxImage.src = "../assets/chpt001/box.png";
 gridImage.src = "../assets/chpt005/1000Grid50pix.png";
 
@@ -118,6 +119,12 @@ function takeSnap(){
     var snapEl = document.querySelector("#snapout");
     console.log(gameArea.toDataURL());
     snapEl.src = gameArea.toDataURL();
+}
+
+function getRandom(max){
+    // returns 0 to max-1
+    // if you want 1 to max simply add 1 to result
+	return Math.floor((Math.random() * max));
 }
 
 class App{
