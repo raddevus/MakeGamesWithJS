@@ -77,6 +77,26 @@ function initApp(){
     Draw();
 }
 
+function DrawCircle(){
+    // Define the circle properties
+    const centerX = 25 + gridLoc.X;
+    const centerY = 25 + gridLoc.Y;
+    const radius = 20;
+
+    // Begin a new path
+    app.context.beginPath();
+    // Draw the circle
+    app.context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+    // Set the fill color
+    app.context.fillStyle = 'blue';
+    // Fill the circle with the color
+    app.context.fill();
+    // Set the border color
+    app.context.strokeStyle = 'black';
+    // Draw the border
+    
+}
+
 function ClearCanvas(){
     app.context.clearRect(0,0,ga_width,ga_height);
     app.context.fillStyle = 'rgba(0, 0, 0, 0.0)';
@@ -84,8 +104,11 @@ function ClearCanvas(){
 }
 
 function Draw(){
+    
     app.context.drawImage(gridImage,gridLoc.X, gridLoc.Y,1000,1000);
+    DrawCircle();
     app.context.drawImage(boxImage, 230, 230,avatarWidth,avatarWidth);
+
 }
 
 function takeSnap(){
