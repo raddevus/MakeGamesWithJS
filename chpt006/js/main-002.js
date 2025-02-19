@@ -23,7 +23,9 @@ var charPositions = [0,17,32];
 var leftCharPositions = [0,17,32];
 var walkWestImgOffset = 17;
 var walkEastImgOffset = 34;
+var walkUpImgOffset = 51;
 var imgOffset = null;
+var numberOfAnimMoves = 4;
 var speed;
 const ga_width = 500;
 const ga_height = 500;
@@ -63,6 +65,7 @@ function initApp(){
 
         switch (e.key){
             case "ArrowUp":{
+                imgOffset = walkUpImgOffset;
                 gridLoc.Y += speed;
                 break;
             }
@@ -159,7 +162,7 @@ function Draw(){
     DrawCircle();
     DrawRandomCircles();
     app.context.drawImage(bunnyImage, charPositions[imgIdx], imgOffset, 16, 16, 230, 230, 48, 48);
-    imgIdx = ++imgIdx % 3
+    imgIdx = ++imgIdx % (numberOfAnimMoves -1);
     //app.context.drawImage(bunnyImage, 230, 230,avatarWidth,avatarWidth);
 
 }
