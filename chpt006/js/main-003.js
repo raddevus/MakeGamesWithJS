@@ -12,19 +12,19 @@ window.onload = () => {
 
 boxImage.src = "../assets/chpt001/box.png";
 gridImage.src = "../assets/chpt005/1000Grid50pix.png";
-bunnyImage.src = "../assets/chpt006/bunny2.png";
+bunnyImage.src = "../assets/BunnyAlt.png";
 
 var app = null;
 var gameArea = null; 
 var mouseLoc = null;
 const mainCanvasId = "gameArea";
 var gridLoc = new Point(0,0);
-var charPositions = [0,17,32];
-var leftCharPositions = [0,17,32];
-var walkWestImgOffset = 17;
-var walkEastImgOffset = 34;
-var walkUpImgOffset = 51;
-var imgOffset = null;
+var charPositions = [64,112,160];
+var leftCharPositions = [16,64,32];
+var walkWestImgOffset = 112;
+var walkEastImgOffset = 160;
+var walkUpImgOffset = 64;
+var imgOffset = 16;
 var numberOfAnimMoves = 4;
 var speed;
 const ga_width = 500;
@@ -70,7 +70,7 @@ function initApp(){
                 break;
             }
             case "ArrowDown":{
-                imgOffset = 0;
+                imgOffset = 16;
                 gridLoc.Y -= speed;
                 break;
             }
