@@ -20,7 +20,6 @@ var mouseLoc = null;
 const mainCanvasId = "gameArea";
 var gridLoc = new Point(0,0);
 var charPositions = [64,112,160];
-var leftCharPositions = [16,64,32];
 var walkWestImgOffset = 112;
 var walkEastImgOffset = 160;
 var walkUpImgOffset = 64;
