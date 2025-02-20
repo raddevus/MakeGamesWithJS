@@ -64,34 +64,121 @@ function initApp(){
 
         switch (e.key){
             case "ArrowUp":{
-                imgOffset = walkUpImgOffset;
-                gridLoc.Y += speed;
+                moveUp(true);
                 break;
             }
             case "ArrowDown":{
-                imgOffset = 16;
-                gridLoc.Y -= speed;
+                moveDown(true);
                 break;
             }
             case "ArrowLeft":{
-                imgOffset = walkWestImgOffset;
-                gridLoc.X += speed;
+                moveLeft(true);
                 break;
             }
             case "ArrowRight":{
-                imgOffset = walkEastImgOffset;
-                gridLoc.X -= speed;
+                moveRight(true);
                 break;
             }
         }
         console.log(`${gridLoc.X} : ${gridLoc.Y}`);
-        
-        ClearCanvas();
-        Draw();
+    });
+
+    let leftArrow = document.querySelector("#leftMoveArrow");
+    let rightArrow = document.querySelector("#rightMoveArrow");
+
+    leftArrow.addEventListener("touchstart", (e) =>{
+        e.preventDefault();
+        isMovingLeft = true;
+        touchMoveHandler("left");
+    });
+
+    leftArrow.addEventListener("touchend", () =>{
+        isMovingLeft = false;
+        clearTimeout(cancelId);
+    });
+
+    rightArrow.addEventListener("touchstart", (e) =>{
+        e.preventDefault();
+        isMovingRight = true;
+        touchMoveHandler("right");
+    });
+
+    rightArrow.addEventListener("touchend", () =>{
+        isMovingRight = false;
+        clearTimeout(cancelId);
     });
 
     app = new App(mainCanvasId);
     Draw();
+}
+var isMovingLeft = false;
+var isMovingRight = false;
+var cancelId = null;
+
+function touchMoveHandler(direction){
+    switch (direction){
+        case "up":{
+            break;
+        }
+        case "down":{
+            break;
+        }
+        case "left":{
+            if (isMovingLeft){
+                cancelId = setTimeout(moveLeft, 50);
+                console.log("set thte timeout...");
+            }
+            break;
+        }
+        case "right":{
+            if (isMovingRight){
+                cancelId = setTimeout(moveRight, 50);
+                console.log("set thte timeout...");
+            }
+            break;
+            break;
+        }
+    }
+
+}
+function moveUp(isKey){
+    imgOffset = walkUpImgOffset;
+    gridLoc.Y += speed;
+    ClearCanvas();
+    Draw();
+}
+
+function moveDown(isKey){
+    imgOffset = 16;
+    gridLoc.Y -= speed;
+    ClearCanvas();
+    Draw();
+}
+
+function moveLeft(isKey){
+    imgOffset = walkWestImgOffset;
+    gridLoc.X += speed;
+    ClearCanvas();
+    Draw();
+    // run code that when isKey isn't defined
+    // bec their isn't a way to pass a value into 
+    // a method that is called by setTimeout!!!
+    if (isKey === undefined){
+        touchMoveHandler("left");
+    }
+}
+
+function moveRight(isKey){
+    imgOffset = walkEastImgOffset;
+    gridLoc.X -= speed;
+    ClearCanvas();
+    Draw();
+    // run code that when isKey isn't defined
+    // bec their isn't a way to pass a value into 
+    // a method that is called by setTimeout!!!
+    if (isKey === undefined){
+        touchMoveHandler("right");
+    }
 }
 
 function generateRandomCircles(){
