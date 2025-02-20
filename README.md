@@ -1,7 +1,7 @@
 ### Associated Web Site
 #### 2025-02-20
 I've begun to create the associated web site where you can see the live examples running & learn more about the book.<br>
-See: <a href="https://makegameswithjs.com" target="_blank">https://makegameswithjs.com)</a> (opens in new tab)<br>
+See: <a href="https://makegameswithjs.com" target="_blank">https://makegameswithjs.com</a><br>
 
 Right now the site is very basic, but more will be coming soon.
 
