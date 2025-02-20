@@ -125,14 +125,14 @@ function touchMoveHandler(direction){
         }
         case "left":{
             if (isMovingLeft){
-                cancelId = setTimeout(moveLeft, 50);
+                cancelId = setTimeout(moveLeft, 35);
                 console.log("set thte timeout...");
             }
             break;
         }
         case "right":{
             if (isMovingRight){
-                cancelId = setTimeout(moveRight, 50);
+                cancelId = setTimeout(moveRight, 35);
                 console.log("set thte timeout...");
             }
             break;
