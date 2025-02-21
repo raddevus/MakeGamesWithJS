@@ -83,8 +83,32 @@ function initApp(){
         console.log(`${gridLoc.X} : ${gridLoc.Y}`);
     });
 
+    let upArrow = document.querySelector("#upMoveArrow");
+    let downArrow = document.querySelector("#downMoveArrow");
     let leftArrow = document.querySelector("#leftMoveArrow");
     let rightArrow = document.querySelector("#rightMoveArrow");
+
+    upArrow.addEventListener("touchstart", (e) =>{
+        e.preventDefault();
+        isMovingUp = true;
+        touchMoveHandler("up");
+    });
+
+    upArrow.addEventListener("touchend", () =>{
+        isMovingUp = false;
+        clearTimeout(cancelId);
+    });
+
+    downArrow.addEventListener("touchstart", (e) =>{
+        e.preventDefault();
+        isMovingDown = true;
+        touchMoveHandler("down");
+    });
+
+    downArrow.addEventListener("touchend", () =>{
+        isMovingDown = false;
+        clearTimeout(cancelId);
+    });
 
     leftArrow.addEventListener("touchstart", (e) =>{
         e.preventDefault();
@@ -111,6 +135,8 @@ function initApp(){
     app = new App(mainCanvasId);
     Draw();
 }
+var isMovingUp = false;
+var isMovingDown = false;
 var isMovingLeft = false;
 var isMovingRight = false;
 var cancelId = null;
@@ -118,9 +144,18 @@ var cancelId = null;
 function touchMoveHandler(direction){
     switch (direction){
         case "up":{
+            if (isMovingUp){
+                cancelId = setTimeout(moveUp, 35);
+                console.log("set thte timeout...");
+            }
             break;
         }
         case "down":{
+            console.log("got down...");
+            if (isMovingDown){
+                cancelId = setTimeout(moveDown, 35);
+                console.log("set thte timeout...");
+            }
             break;
         }
         case "left":{
@@ -136,7 +171,6 @@ function touchMoveHandler(direction){
                 console.log("set thte timeout...");
             }
             break;
-            break;
         }
     }
 
@@ -146,6 +180,12 @@ function moveUp(isKey){
     gridLoc.Y += speed;
     ClearCanvas();
     Draw();
+    // run code that when isKey isn't defined
+    // bec their isn't a way to pass a value into 
+    // a method that is called by setTimeout!!!
+    if (isKey === undefined){
+        touchMoveHandler("up");
+    }
 }
 
 function moveDown(isKey){
@@ -153,6 +193,12 @@ function moveDown(isKey){
     gridLoc.Y -= speed;
     ClearCanvas();
     Draw();
+    // run code that when isKey isn't defined
+    // bec their isn't a way to pass a value into 
+    // a method that is called by setTimeout!!!
+    if (isKey === undefined){
+        touchMoveHandler("down");
+    }
 }
 
 function moveLeft(isKey){
