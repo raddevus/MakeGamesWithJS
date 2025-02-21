@@ -15,7 +15,7 @@ body{margin:0px;}
 
 .container{display:none;}
 
-@media (max-width: 768px) {
+@media (pointer: coarse) {
     .container {
         display: flex;
         justify-content: space-between;
