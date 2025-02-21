@@ -12,3 +12,16 @@ body{margin:0px;}
     -ms-user-select: none;     /* Internet Explorer/Edge */
     user-select: none;         /* Non-prefixed version, currently supported by all modern browsers */
 }
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width:500px;
+}
+.left {
+    margin-right: auto; /* Ensure it takes as much space as possible */
+}
+.right {
+    
+    /* Rely on flexbox to align this to the right */
+}
