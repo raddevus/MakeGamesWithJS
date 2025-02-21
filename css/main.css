@@ -25,3 +25,5 @@ body{margin:0px;}
     
     /* Rely on flexbox to align this to the right */
 }
+
+.arrow-circle-padding{padding:10px;}
