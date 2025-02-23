@@ -31,6 +31,9 @@ const ga_height = 500;
 let avatarWidth = 30;
 // basically offset is the avatar center point
 let offset = avatarWidth / 2;
+let avatarLocX = 230;
+let avatarLocY = 230;
+let avatarSize = 48;
 
 
 function initApp(){
@@ -41,7 +44,7 @@ function initApp(){
     gameArea.height = ga_height;
 
     speedEl = document.querySelector("#speed");
-    speedEl.value = 5;
+    speedEl.value = 20;
     speed = speedEl.valueAsNumber;
 
     speedEl.addEventListener("change", (e) => {
@@ -293,7 +296,7 @@ function Draw(){
     app.context.drawImage(gridImage,gridLoc.X, gridLoc.Y,2560,2560);
     DrawCircle();
     DrawRandomCircles();
-    app.context.drawImage(bunnyImage, charPositions[imgIdx], imgOffset, 16, 16, 230, 230, 48, 48);
+    app.context.drawImage(bunnyImage, charPositions[imgIdx], imgOffset, 16, 16, avatarLocY, avatarLocY, avatarSize, avatarSize);
     imgIdx = ++imgIdx % (numberOfAnimMoves -1);
     //app.context.drawImage(bunnyImage, 230, 230,avatarWidth,avatarWidth);
 
