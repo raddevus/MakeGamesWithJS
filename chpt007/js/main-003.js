@@ -290,7 +290,7 @@ function ClearCanvas(){
 
 function Draw(){
     
-    app.context.drawImage(gridImage,gridLoc.X, gridLoc.Y,1000,1000);
+    app.context.drawImage(gridImage,gridLoc.X, gridLoc.Y,2560,2560);
     DrawCircle();
     DrawRandomCircles();
     app.context.drawImage(bunnyImage, charPositions[imgIdx], imgOffset, 16, 16, 230, 230, 48, 48);
