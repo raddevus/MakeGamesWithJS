@@ -34,6 +34,7 @@ let offset = avatarWidth / 2;
 let avatarLocX = 230;
 let avatarLocY = 230;
 let avatarSize = 48;
+let avatarCenter = new Point(230+24, 230+24); // 254 & 254 is always center
 
 
 function initApp(){
@@ -63,7 +64,7 @@ function initApp(){
     generateRandomCircles();
 
     document.addEventListener("keydown", (e) => {
-        console.log(`${gridLoc.X} : ${gridLoc.Y}`);
+       // console.log(`${gridLoc.X} : ${gridLoc.Y}`);
 
         switch (e.key){
             case "ArrowUp":{
@@ -83,7 +84,7 @@ function initApp(){
                 break;
             }
         }
-        console.log(`${gridLoc.X} : ${gridLoc.Y}`);
+        //console.log(`${gridLoc.X} : ${gridLoc.Y}`);
     });
 
     let upArrow = document.querySelector("#upMoveArrow");
@@ -239,7 +240,7 @@ function generateRandomCircles(){
         var r = getRandom(255);
         var g = getRandom(255);
         var b = getRandom(255);
-        var rndColor = `rgba(${r}, ${g}, ${b}`;
+        var rndColor = `rgb(${r}, ${g}, ${b})`;
         // gen random-ish point
         var p = new Point(x,y)
         allCircles.push(new Circle(p,rndColor));
@@ -299,7 +300,30 @@ function Draw(){
     app.context.drawImage(bunnyImage, charPositions[imgIdx], imgOffset, 16, 16, avatarLocY, avatarLocY, avatarSize, avatarSize);
     imgIdx = ++imgIdx % (numberOfAnimMoves -1);
     //app.context.drawImage(bunnyImage, 230, 230,avatarWidth,avatarWidth);
+    let hitSuccess = hitTest(allCircles);
+    if (hitSuccess){
+        console.log(`hitSuccess: ${hitSuccess.Point.X} : ${hitSuccess.Point.Y} ${hitSuccess.Color}`);
+        allCircles.includes(hitSuccess) && allCircles.splice(allCircles.indexOf(hitSuccess), 1);
+    }
+}
 
+function hitTest(hitTestObjArray)
+{
+    console.log("trying hittest...");
+  for (var k = 0;k < hitTestObjArray.length; k++)
+  {
+    
+	var testObjXmax = hitTestObjArray[k].Point.X + gridLoc.X + radius; // size of the circle
+    
+	var testObjYmax = hitTestObjArray[k].Point.Y + gridLoc.Y +radius;
+    
+	if (((avatarCenter.X >= (hitTestObjArray[k].Point.X + gridLoc.X)) && (avatarCenter.X <= testObjXmax)) && 
+		((avatarCenter.Y >= (hitTestObjArray[k].Point.Y + gridLoc.Y)) && (avatarCenter.Y <= testObjYmax)))
+	  {
+		return hitTestObjArray[k];
+	  }  
+  }
+  return null;
 }
 
 function takeSnap(){
