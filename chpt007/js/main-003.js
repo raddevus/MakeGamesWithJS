@@ -5,6 +5,8 @@ var bunnyImage = new Image();
 var imgIdx = 0;
 var radius = 10;
 var allCircles = [];
+var scoreEl = null;
+var score = 0;
 
 window.onload = () => {
     initApp();
@@ -45,7 +47,7 @@ function initApp(){
     gameArea.height = ga_height;
 
     speedEl = document.querySelector("#speed");
-    speedEl.value = 20;
+    speedEl.value = 5;
     speed = speedEl.valueAsNumber;
 
     speedEl.addEventListener("change", (e) => {
@@ -135,7 +137,7 @@ function initApp(){
         isMovingRight = false;
         clearTimeout(cancelId);
     });
-
+    scoreEl = document.querySelector("#score");
     app = new App(mainCanvasId);
     Draw();
 }
@@ -304,6 +306,7 @@ function Draw(){
     if (hitSuccess){
         console.log(`hitSuccess: ${hitSuccess.Point.X} : ${hitSuccess.Point.Y} ${hitSuccess.Color}`);
         allCircles.includes(hitSuccess) && allCircles.splice(allCircles.indexOf(hitSuccess), 1);
+        scoreEl.textContent = score+=10;
     }
 }
 
