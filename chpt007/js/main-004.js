@@ -9,7 +9,7 @@ var allCircles = [];
 var scoreEl = null;
 var score = 0;
 var countdownEl = null;
-var timeLeft = 10;
+var timeLeft = 2;
 var isGameRunning = true;
 
 window.onload = () => {
@@ -171,7 +171,27 @@ function DrawGameEnd(){
 }
 
 function DrawScore(){
-
+    //app.context.textBaseline = textBaseline;
+    app.context.textAlign = "center";
+    app.context.font = `bold 40px serif`;
+    
+    
+    app.context.shadowColor ="707070";
+    app.context.shadowOffsetX = 5;
+    app.context.shadowOffsetY = 5;
+    app.context.shadowBlur = 6;
+    
+    // app.context.globalAlpha = textAlpha;
+    
+    
+    var xPosition = 310;
+    var yPosition = 205;
+    score = 1000;
+    app.context.fillStyle    = "light-blue";
+    app.context.fillText  ( score,  xPosition ,yPosition);
+    app.context.strokeStyle = "#000000";
+    app.context.strokeText  ( score, xPosition,yPosition);
+    
 }
 
 var isMovingUp = false;
