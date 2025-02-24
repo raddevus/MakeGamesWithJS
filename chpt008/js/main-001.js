@@ -45,7 +45,10 @@ let avatarSize = 48;
 let avatarCenter = new Point(230+24, 230+24); // 254 & 254 is always center
 let timerId = null;
 
-let getDotSound = null; 
+let getDotSound0 = null; 
+let getDotSound1 = null;
+let getDotSound2 = null;
+let dotSoundIdx = 0;
 
 function initApp(){
     
@@ -130,7 +133,9 @@ function initApp(){
     app = new App(mainCanvasId);
     Draw();
     readBestScoreFromLS();
-    getDotSound = document.querySelector("#gotDotSound");
+    getDotSound0 = document.querySelector("#gotDotSound0");
+    getDotSound1 = document.querySelector("#gotDotSound1");
+    getDotSound2 = document.querySelector("#gotDotSound2");
 }
 
 function KeydownHandler(e){
@@ -409,7 +414,22 @@ function Draw(){
     if (hitSuccess){
         // console.log(`hitSuccess: ${hitSuccess.Point.X} : ${hitSuccess.Point.Y} ${hitSuccess.Color}`);
         allCircles.includes(hitSuccess) && allCircles.splice(allCircles.indexOf(hitSuccess), 1);
-        getDotSound.play();
+        dotSoundIdx = ++dotSoundIdx % (3);
+        switch(dotSoundIdx){
+            case 0:{
+                getDotSound0.play();
+                break;
+            }
+            case 1:{
+                getDotSound1.play();
+                break;
+            }
+            case 2:{
+                getDotSound0.play();
+                break;
+            }
+        }
+        
         scoreEl.textContent = score+=10;
         timeLeft += 2;
 
@@ -418,7 +438,6 @@ function Draw(){
 
 function hitTest(hitTestObjArray)
 {
-    console.log("trying hittest...");
   for (var k = 0;k < hitTestObjArray.length; k++)
   {
     
