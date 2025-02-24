@@ -7,6 +7,8 @@ var radius = 10;
 var allCircles = [];
 var scoreEl = null;
 var score = 0;
+var countdownEl = null;
+var timeLeft = 10;
 
 window.onload = () => {
     initApp();
@@ -37,7 +39,7 @@ let avatarLocX = 230;
 let avatarLocY = 230;
 let avatarSize = 48;
 let avatarCenter = new Point(230+24, 230+24); // 254 & 254 is always center
-
+let timerId = null;
 
 function initApp(){
     
@@ -138,9 +140,20 @@ function initApp(){
         clearTimeout(cancelId);
     });
     scoreEl = document.querySelector("#score");
+    countdownEl = document.querySelector("#countdown");
+    countdownEl.textContet = timeLeft;
+    timerId = setInterval(countdown, 1000);
     app = new App(mainCanvasId);
     Draw();
 }
+
+function countdown(){
+    if (timeLeft == 1){
+        clearInterval(timerId);
+    }
+    countdownEl.textContent = --timeLeft;
+}
+
 var isMovingUp = false;
 var isMovingDown = false;
 var isMovingLeft = false;
@@ -307,6 +320,7 @@ function Draw(){
         console.log(`hitSuccess: ${hitSuccess.Point.X} : ${hitSuccess.Point.Y} ${hitSuccess.Color}`);
         allCircles.includes(hitSuccess) && allCircles.splice(allCircles.indexOf(hitSuccess), 1);
         scoreEl.textContent = score+=10;
+        timeLeft += 2;
     }
 }
 
