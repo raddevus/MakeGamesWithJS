@@ -9,8 +9,9 @@ var allCircles = [];
 var scoreEl = null;
 var score = 0;
 var countdownEl = null;
-var timeLeft = 2;
+var timeLeft = 10;
 var isGameRunning = true;
+var bestScore = 0;
 
 window.onload = () => {
     initApp();
@@ -126,6 +127,7 @@ function initApp(){
     timerId = setInterval(countdown, 1000);
     app = new App(mainCanvasId);
     Draw();
+    readBestScoreFromLS();
 }
 
 function KeydownHandler(e){
@@ -151,11 +153,26 @@ function KeydownHandler(e){
         }
 }
 
+function readBestScoreFromLS(){
+    // read best score from localStorage
+    bestScore = localStorage.getItem("bestScore");
+    if (!bestScore) {bestScore = 0;}
+}
+
+function writeBestScoreToLS(newScore){
+    // write best score to localStorage
+    if (newScore > bestScore){
+        localStorage.setItem("bestScore",newScore)
+        bestScore = newScore;
+    }
+}
+
 function countdown(){
     if (timeLeft == 1){
         clearInterval(timerId);
         StopInput();
         DrawGameEnd();
+        writeBestScoreToLS(score);
         DrawScore();
     }
     countdownEl.textContent = --timeLeft;
@@ -186,12 +203,17 @@ function DrawScore(){
     
     var xPosition = 310;
     var yPosition = 205;
-    score = 1000;
+    var bestScoreY = 265;
+    
     app.context.fillStyle    = "light-blue";
     app.context.fillText  ( score,  xPosition ,yPosition);
     app.context.strokeStyle = "#000000";
     app.context.strokeText  ( score, xPosition,yPosition);
     
+    app.context.fillStyle    = "light-blue";
+    app.context.fillText  ( bestScore,  xPosition ,bestScoreY);
+    app.context.strokeStyle = "#000000";
+    app.context.strokeText  ( bestScore, xPosition,bestScoreY);
 }
 
 var isMovingUp = false;
