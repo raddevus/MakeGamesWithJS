@@ -167,7 +167,7 @@ function StopInput(){
 }
 
 function DrawGameEnd(){
-    app.context.drawImage(endGame,110, 110,317,240);
+    app.context.drawImage(endGame,50, 50,317,240);
 }
 
 function DrawScore(){
