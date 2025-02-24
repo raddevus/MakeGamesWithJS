@@ -45,6 +45,8 @@ let avatarSize = 48;
 let avatarCenter = new Point(230+24, 230+24); // 254 & 254 is always center
 let timerId = null;
 
+let getDotSound = null; 
+
 function initApp(){
     
     var context = null;
@@ -128,6 +130,7 @@ function initApp(){
     app = new App(mainCanvasId);
     Draw();
     readBestScoreFromLS();
+    getDotSound = document.querySelector("#gotDotSound");
 }
 
 function KeydownHandler(e){
@@ -404,10 +407,12 @@ function Draw(){
     //app.context.drawImage(bunnyImage, 230, 230,avatarWidth,avatarWidth);
     let hitSuccess = hitTest(allCircles);
     if (hitSuccess){
-        console.log(`hitSuccess: ${hitSuccess.Point.X} : ${hitSuccess.Point.Y} ${hitSuccess.Color}`);
+        // console.log(`hitSuccess: ${hitSuccess.Point.X} : ${hitSuccess.Point.Y} ${hitSuccess.Color}`);
         allCircles.includes(hitSuccess) && allCircles.splice(allCircles.indexOf(hitSuccess), 1);
+        getDotSound.play();
         scoreEl.textContent = score+=10;
         timeLeft += 2;
+
     }
 }
 
