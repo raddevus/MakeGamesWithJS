@@ -2,6 +2,7 @@
 var boxImage = new Image();
 var gridImage = new Image();
 var bunnyImage = new Image();
+var endGame = new Image();
 var imgIdx = 0;
 var radius = 10;
 var allCircles = [];
@@ -9,6 +10,7 @@ var scoreEl = null;
 var score = 0;
 var countdownEl = null;
 var timeLeft = 10;
+var isGameRunning = true;
 
 window.onload = () => {
     initApp();
@@ -17,6 +19,7 @@ window.onload = () => {
 boxImage.src = "../assets/chpt001/box.png";
 gridImage.src = "./assets/1stTiled.png";
 bunnyImage.src = "../assets/BunnyAlt.png";
+endGame.src = "./assets/endGameDialog.png";
 
 var app = null;
 var gameArea = null; 
@@ -67,29 +70,7 @@ function initApp(){
     });
     generateRandomCircles();
 
-    document.addEventListener("keydown", (e) => {
-       // console.log(`${gridLoc.X} : ${gridLoc.Y}`);
-
-        switch (e.key){
-            case "ArrowUp":{
-                moveUp(true);
-                break;
-            }
-            case "ArrowDown":{
-                moveDown(true);
-                break;
-            }
-            case "ArrowLeft":{
-                moveLeft(true);
-                break;
-            }
-            case "ArrowRight":{
-                moveRight(true);
-                break;
-            }
-        }
-        //console.log(`${gridLoc.X} : ${gridLoc.Y}`);
-    });
+    document.addEventListener("keydown", KeydownHandler);
 
     let upArrow = document.querySelector("#upMoveArrow");
     let downArrow = document.querySelector("#downMoveArrow");
@@ -147,11 +128,50 @@ function initApp(){
     Draw();
 }
 
+function KeydownHandler(e){
+    // moved this from the anonymous function 
+    // so we can more easily remove the event listener.
+        switch (e.key){
+            case "ArrowUp":{
+                moveUp(true);
+                break;
+            }
+            case "ArrowDown":{
+                moveDown(true);
+                break;
+            }
+            case "ArrowLeft":{
+                moveLeft(true);
+                break;
+            }
+            case "ArrowRight":{
+                moveRight(true);
+                break;
+            }
+        }
+}
+
 function countdown(){
     if (timeLeft == 1){
         clearInterval(timerId);
+        StopInput();
+        DrawGameEnd();
+        DrawScore();
     }
     countdownEl.textContent = --timeLeft;
+}
+
+function StopInput(){
+    isGameRunning = false;
+    document.removeEventListener("keydown", KeydownHandler);
+}
+
+function DrawGameEnd(){
+    app.context.drawImage(endGame,110, 110,317,240);
+}
+
+function DrawScore(){
+
 }
 
 var isMovingUp = false;
@@ -161,6 +181,11 @@ var isMovingRight = false;
 var cancelId = null;
 
 function touchMoveHandler(direction){
+    if (!isGameRunning){
+        // insures that after game end 
+        // that the user cannot move the avatar
+        return;
+    }
     switch (direction){
         case "up":{
             if (isMovingUp){
@@ -195,6 +220,11 @@ function touchMoveHandler(direction){
 
 }
 function moveUp(isKey){
+    if (!isGameRunning){
+        // insures that after game end 
+        // that the user cannot move the avatar
+        return;
+    }
     imgOffset = walkUpImgOffset;
     gridLoc.Y += speed;
     ClearCanvas();
@@ -208,6 +238,11 @@ function moveUp(isKey){
 }
 
 function moveDown(isKey){
+    if (!isGameRunning){
+        // insures that after game end 
+        // that the user cannot move the avatar
+        return;
+    }
     imgOffset = 16;
     gridLoc.Y -= speed;
     ClearCanvas();
@@ -221,6 +256,11 @@ function moveDown(isKey){
 }
 
 function moveLeft(isKey){
+    if (!isGameRunning){
+        // insures that after game end 
+        // that the user cannot move the avatar
+        return;
+    }
     imgOffset = walkWestImgOffset;
     gridLoc.X += speed;
     ClearCanvas();
@@ -234,6 +274,11 @@ function moveLeft(isKey){
 }
 
 function moveRight(isKey){
+    if (!isGameRunning){
+        // insures that after game end 
+        // that the user cannot move the avatar
+        return;
+    }
     imgOffset = walkEastImgOffset;
     gridLoc.X -= speed;
     ClearCanvas();
