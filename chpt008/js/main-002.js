@@ -44,11 +44,9 @@ let avatarLocY = 230;
 let avatarSize = 48;
 let avatarCenter = new Point(230+24, 230+24); // 254 & 254 is always center
 let timerId = null;
-
-let getDotSound0 = null; 
-let getDotSound1 = null;
-let getDotSound2 = null;
-let dotSoundIdx = 0;
+let audioGotDotEl = null;
+let audioType = null;
+const GOT_DOT_SOUND = "./assets/gotDot0";
 
 function initApp(){
     
@@ -133,9 +131,7 @@ function initApp(){
     app = new App(mainCanvasId);
     Draw();
     readBestScoreFromLS();
-    getDotSound0 = document.querySelector("#gotDotSound0");
-    getDotSound1 = document.querySelector("#gotDotSound1");
-    getDotSound2 = document.querySelector("#gotDotSound2");
+    initSound();
 }
 
 function KeydownHandler(e){
@@ -184,6 +180,33 @@ function countdown(){
         DrawScore();
     }
     countdownEl.textContent = --timeLeft;
+}
+
+function initSound(){
+    audioGotDotEl = document.querySelector("#gotDotAudio");
+	audioType = supportedAudioFormat(audioGotDotEl);
+    console.log(`audioType ${audioType}`);
+}
+
+function supportedAudioFormat(audio) {
+	var returnExtension = "";
+	if (audio.canPlayType("audio/ogg") =="probably" || audio.canPlayType("audio/ogg") == "maybe") {
+		returnExtension = "ogg";
+	} else if(audio.canPlayType("audio/wav") =="probably" || audio.canPlayType("audio/wav") == "maybe") {
+		returnExtension = "wav";
+	} else if(audio.canPlayType("audio/mp3") == "probably" || audio.canPlayType("audio/mp3") == "maybe") {
+		returnExtension = "mp3";
+	}
+	return returnExtension;
+}
+
+ function playSound(sound,volume) {
+   var tempSound = document.createElement("audio");
+   tempSound.setAttribute("src", sound + "." + audioType);
+   tempSound.loop = false;
+   tempSound.volume = volume;
+   tempSound.play();
+   //sounds.push(tempSound);
 }
 
 function StopInput(){
@@ -414,22 +437,7 @@ function Draw(){
     if (hitSuccess){
         // console.log(`hitSuccess: ${hitSuccess.Point.X} : ${hitSuccess.Point.Y} ${hitSuccess.Color}`);
         allCircles.includes(hitSuccess) && allCircles.splice(allCircles.indexOf(hitSuccess), 1);
-        dotSoundIdx = ++dotSoundIdx % (3);
-        switch(dotSoundIdx){
-            case 0:{
-                getDotSound0.play();
-                break;
-            }
-            case 1:{
-                getDotSound1.play();
-                break;
-            }
-            case 2:{
-                getDotSound0.play();
-                break;
-            }
-        }
-        
+        playSound(GOT_DOT_SOUND,1);
         scoreEl.textContent = score+=10;
         timeLeft += 2;
 
