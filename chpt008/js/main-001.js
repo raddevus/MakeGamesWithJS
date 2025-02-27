@@ -357,26 +357,6 @@ function generateRandomCircles(){
     }
 }
 
-function DrawCircle(){
-    // Define the circle properties
-    const centerX = 25 + gridLoc.X;
-    const centerY = 25 + gridLoc.Y;
-    
-
-    // Begin a new path
-    app.context.beginPath();
-    // Draw the circle
-    app.context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-    // Set the fill color
-    app.context.fillStyle =  `rgba(255, 99, 71, 0.4)`;//'blue';
-    // Fill the circle with the color
-    app.context.fill();
-    // Set the border color
-    app.context.strokeStyle = 'black';
-    // Draw the border
-    
-}
-
 function DrawRandomCircles(){
 
     allCircles.forEach(c => {
@@ -405,7 +385,6 @@ function ClearCanvas(){
 function Draw(){
     
     app.context.drawImage(gridImage,gridLoc.X, gridLoc.Y,2560,2560);
-    DrawCircle();
     DrawRandomCircles();
     app.context.drawImage(bunnyImage, charPositions[imgIdx], imgOffset, 16, 16, avatarLocY, avatarLocY, avatarSize, avatarSize);
     imgIdx = ++imgIdx % (numberOfAnimMoves -1);
