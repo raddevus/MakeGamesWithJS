@@ -419,27 +419,37 @@ function Draw(){
         playSound(GOT_DOT_SOUND,1);
         scoreEl.textContent = score+=10;
         timeLeft += 2;
-
+        // needs to call Draw() again, bec
+        // the dot needs to disappear since
+        // it has been hit (collected by sprite)
+        Draw();
     }
 }
 
 function hitTest(hitTestObjArray)
 {
+    var avatarMin = avatarLocX + 6;
+    var avatarMax = avatarLocX + 36;
   for (var k = 0;k < hitTestObjArray.length; k++)
   {
     
+    var testObjXmin = hitTestObjArray[k].Point.X + gridLoc.X - radius;
 	var testObjXmax = hitTestObjArray[k].Point.X + gridLoc.X + radius; // size of the circle
+    var testObjYmin = hitTestObjArray[k].Point.Y + gridLoc.Y - radius;
+	var testObjYmax = hitTestObjArray[k].Point.Y + gridLoc.Y + radius;
     
-	var testObjYmax = hitTestObjArray[k].Point.Y + gridLoc.Y +radius;
-    
-	if (((avatarCenter.X >= (hitTestObjArray[k].Point.X + gridLoc.X)) && (avatarCenter.X <= testObjXmax)) && 
-		((avatarCenter.Y >= (hitTestObjArray[k].Point.Y + gridLoc.Y)) && (avatarCenter.Y <= testObjYmax)))
-	  {
-		return hitTestObjArray[k];
-	  }  
+    if ( isInRange(testObjXmax,avatarMin,avatarMax) && isInRange(testObjYmax, avatarMin, avatarMax)
+    || isInRange(testObjXmin,avatarMin,avatarMax) && isInRange(testObjYmin, avatarMin, avatarMax)){
+        return hitTestObjArray[k];
+    }
   }
   return null;
 }
+
+function isInRange(value, min, max) {
+    return value >= min && value <= max;
+}
+
 
 function takeSnap(){
     var gameArea = document.querySelector(`#${mainCanvasId}`);
