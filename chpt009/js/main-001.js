@@ -18,7 +18,7 @@ window.onload = () => {
 }
 
 boxImage.src = "../assets/chpt001/box.png";
-gridImage.src = "../assets/1stTiled.png";
+gridImage.src = "../assets/10x5Grass.png";
 bunnyImage.src = "../assets/BunnyAlt.png";
 endGame.src = "../assets/endGameDialog.png";
 
