@@ -9,7 +9,7 @@ var allCircles = [];
 var scoreEl = null;
 var score = 0;
 var countdownEl = null;
-var timeLeft = 10;
+var timeLeft = 1000;
 var isGameRunning = true;
 var bestScore = 0;
 
@@ -47,6 +47,8 @@ let timerId = null;
 let audioGotDotEl = null;
 let audioType = null;
 const GOT_DOT_SOUND = "../assets/sounds/gotDot0";
+let allMapTiles = [];
+const MAP_TILE_SIZE = 8;
 
 function initApp(){
     
@@ -129,9 +131,21 @@ function initApp(){
     countdownEl.textContet = timeLeft;
     timerId = setInterval(countdown, 1000);
     app = new App(mainCanvasId);
+    initMap();
     Draw();
     readBestScoreFromLS();
     initSound();
+}
+
+function initMap(){
+    // map is 2560 x 2560 pixels
+    // each tile is 8x8
+    // 320 tiles (320x320 = 102,400) - 102,400 x (8x8) = 6,553,600 pixels
+    for (var i =0; i< 102400;i++){
+        var x = getRandom(10) * 8;
+        var y = getRandom(5) * 8;
+        allMapTiles.push(new Point(x,y));
+    }
 }
 
 function KeydownHandler(e){
@@ -405,13 +419,28 @@ function ClearCanvas(){
     app.context.fillRect(0, 0, ga_width,ga_height);
 }
 
+function DrawMap(){
+    var outX = gridLoc.X;
+    var outY = gridLoc.Y;
+    for (var i = 0; i<65;i++){
+        outX = 0;
+        for (var j = 0; j<65;j++){
+            app.context.drawImage(gridImage, allMapTiles[i].X ,allMapTiles[i].Y, MAP_TILE_SIZE, MAP_TILE_SIZE,
+                outX, outY,MAP_TILE_SIZE,MAP_TILE_SIZE);
+                console.log(`outXY: ${outY}`);    
+                outX +=(MAP_TILE_SIZE);
+        }
+        outY += MAP_TILE_SIZE;
+    }
+}
+
 function Draw(){
     
-    app.context.drawImage(gridImage,gridLoc.X, gridLoc.Y,2560,2560);
+    DrawMap();
     DrawRandomCircles();
     app.context.drawImage(bunnyImage, charPositions[imgIdx], imgOffset, 16, 16, avatarLocY, avatarLocY, avatarSize, avatarSize);
     imgIdx = ++imgIdx % (numberOfAnimMoves -1);
-    //app.context.drawImage(bunnyImage, 230, 230,avatarWidth,avatarWidth);
+    
     let hitSuccess = hitTest(allCircles);
     if (hitSuccess){
         // console.log(`hitSuccess: ${hitSuccess.Point.X} : ${hitSuccess.Point.Y} ${hitSuccess.Color}`);
