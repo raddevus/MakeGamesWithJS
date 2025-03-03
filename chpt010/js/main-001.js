@@ -132,7 +132,30 @@ function initApp(){
     Draw();
     readBestScoreFromLS();
     initSound();
+    initGamePad();
 }
+
+function initGamePad(){
+    console.log("attempting gamepad...");
+    window.addEventListener("gamepadconnected", (e) => {
+        console.log(`Gamepad connected at index ${e.gamepad.index}: ${e.gamepad.id}. ${e.gamepad.buttons.length} buttons, ${e.gamepad.axes.length} axes.`);
+      });
+}
+
+// setInterval(updateGamepadStatus,500);
+
+function updateGamepadStatus() {
+    const gamepads = navigator.getGamepads();
+    for (let i = 0; i < gamepads.length; i++) {
+      const gamepad = gamepads[i];
+      if (gamepad) {
+        // Process gamepad input
+        console.log(`Gamepad ${i}: ${gamepad.id}`);
+        console.log(`Buttons: ${gamepad.buttons.map(button => button.pressed)}`);
+        console.log(`Axes: ${gamepad.axes}`);
+      }
+    }
+  }
 
 function KeydownHandler(e){
     // moved this from the anonymous function 
