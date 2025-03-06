@@ -142,18 +142,38 @@ function initGamePad(){
       });
 }
 
-// setInterval(updateGamepadStatus,500);
-
+setInterval(updateGamepadStatus,10);
+let gamepad = null;
 function updateGamepadStatus() {
-    const gamepads = navigator.getGamepads();
-    for (let i = 0; i < gamepads.length; i++) {
-      const gamepad = gamepads[i];
-      if (gamepad) {
-        // Process gamepad input
-        console.log(`Gamepad ${i}: ${gamepad.id}`);
-        console.log(`Buttons: ${gamepad.buttons.map(button => button.pressed)}`);
-        console.log(`Axes: ${gamepad.axes}`);
-      }
+    gamepad = navigator.getGamepads()[0];
+    if (gamepad) {
+    // Process gamepad input
+    // console.log(`Gamepad ${i}: ${gamepad.id}`);
+    //console.log(`Buttons: ${gamepad.buttons.map(button => button.pressed)}`);
+    // console.log(`Axes: ${gamepad.axes}`);
+        var a = 1, b = 0, c = 3, d = 4;
+       
+        var e = {};
+        if (gamepad.buttons[a].pressed){
+            e.key="ArrowRight";
+            KeydownHandler(e);
+            return;
+        }
+        if (gamepad.buttons[b].pressed){
+            e.key="ArrowDown";
+            KeydownHandler(e);
+            return;
+        }
+        if ( gamepad.buttons[c].pressed){
+            e.key="ArrowLeft"
+            KeydownHandler(e);
+            return;
+        }
+        if (gamepad.buttons[d].pressed ){
+            e.key = "ArrowUp";
+            KeydownHandler(e);
+            return;
+        }
     }
   }
 
